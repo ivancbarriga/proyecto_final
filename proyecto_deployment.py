@@ -3,7 +3,7 @@ import numpy as np
 import joblib
 import os
 import tensorflow.compat.v1 as tf
-#tf.disable_v2_behavior()
+tf.disable_v2_behavior()
 tf.disable_eager_execution()
 import tensorflow_hub as hub
 from tensorflow.keras.models import load_model
