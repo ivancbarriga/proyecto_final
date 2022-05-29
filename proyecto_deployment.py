@@ -11,12 +11,13 @@ from keras.models import model_from_json
 
 def transformar(datos_entrada):
     
+    print("API -> Ingreso a deployment")
     # 1. Dataframe de los datos de entrada
     df_datos = pd.DataFrame(datos_entrada, index=[0])
-    
+    print("> Ingreso a deployment: lectura datos de entrada")
     # Unir el título con la trama para que sea un mismo texto para el encoder
     df_datos['title_plot'] = df_datos['title'] + ' - ' + df_datos['plot']
-    
+    print("> Ingreso a deployment: unificacion titulo y sinopsis")
     # Eliminar columnas que se unieron
     df_datos.drop(columns=['title','plot'], inplace=True)
 
