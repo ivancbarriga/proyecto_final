@@ -4,11 +4,15 @@ import joblib
 from proyecto_deployment import transformar
 
 
-from flask import Flask
-from flask_talisman import Talisman
-
 app = Flask(__name__)
-Talisman(app)
+
+
+@app.before_request
+def before_request():
+    if not request.is_secure:
+        url = request.url.replace('http://', 'https://', 1)
+        code = 301
+        return redirect(url, code=code)
 
 api = Api(
     app, 
