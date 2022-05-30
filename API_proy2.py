@@ -1,14 +1,9 @@
 from flask import Flask
 from flask_restx import Api, Resource, fields
 import joblib
-from proyecto_deployment import transformar
-
+from proyecto2_deployment import transformar
 
 app = Flask(__name__)
-
-
-
-
 api = Api(
     app, 
     version='1.0', 
@@ -45,13 +40,6 @@ resource_fields = api.model('Resource', {
     'result': fields.String,
 })
 
-@app.before_request
-def before_request():
-    if not request.is_secure:
-        url = request.url.replace('http://', 'https://', 1)
-        code = 301
-        return redirect(url, code=code)
-        
 @ns.route('/')
 class PrediccionApi(Resource):
 
