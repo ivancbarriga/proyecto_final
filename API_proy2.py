@@ -1,12 +1,8 @@
 from flask import Flask
 from flask_restx import Api, Resource, fields
 import joblib
-from proyecto_deployment import transformar
-from flask import Flask
-from flask_cors import CORS
+from proyecto2_deployment import transformar
 
-app = Flask(__name__)
-CORS(app, resources={r"*": {"origins": "*"}})
 app = Flask(__name__)
 
 api = Api(
@@ -52,11 +48,11 @@ class PrediccionApi(Resource):
     @api.marshal_with(resource_fields)
     def get(self):
         args = parser.parse_args()
-        
+
         return {
          "result": transformar(args)  
         }, 200
-    
-    
+
+
 if __name__ == '__main__':
-    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8888)
+    app.run(debug=True, use_reloader=False, host='0.0.0.0', port=8888) 
