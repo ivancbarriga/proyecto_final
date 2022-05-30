@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_restx import Api, Resource, fields
 import joblib
-from proyecto2_deployment import transformar
+from proyecto_deployment import transformar
 
 app = Flask(__name__)
 
