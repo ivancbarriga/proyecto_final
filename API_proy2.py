@@ -2,6 +2,7 @@ from flask import Flask
 from flask_restx import Api, Resource, fields
 import joblib
 from proyecto2_deployment import transformar
+from flask import request
 
 app = Flask(__name__)
 api = Api(
