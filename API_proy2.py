@@ -3,7 +3,12 @@ from flask_restx import Api, Resource, fields
 import joblib
 from proyecto_deployment import transformar
 
+
+from flask import Flask
+from flask_talisman import Talisman
+
 app = Flask(__name__)
+Talisman(app)
 
 api = Api(
     app, 
