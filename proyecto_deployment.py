@@ -14,22 +14,33 @@ def transformar(datos_entrada):
     print("API -> Ingreso a deployment")
     # 1. Dataframe de los datos de entrada
     df_datos = pd.DataFrame(datos_entrada, index=[0])
+    print("datos cargados")
+
     print("> Ingreso a deployment: lectura datos de entrada")
     # Unir el título con la trama para que sea un mismo texto para el encoder
     df_datos['title_plot'] = df_datos['title'] + ' - ' + df_datos['plot']
+    print("creacion tittle+plot")
+
     print("> Ingreso a deployment: unificacion titulo y sinopsis")
     # Eliminar columnas que se unieron
     df_datos.drop(columns=['title','plot'], inplace=True)
+    print("eliminacion col tittle , plot")
 
+    print(">ingreso a TF Encoder")
     # Importación el módulo TF Hub del Universal Sentence Encoder
     tf.disable_eager_execution()
+    
+    print(">ingreso a descarga encoder2")
     module_url = "https://tfhub.dev/google/universal-sentence-encoder/2"
     embed = hub.Module(module_url)
+    print(">encoder2 almacenado en metodo")
 
+    print("abrir sesion de tf")
     with tf.Session() as session:
         session.run([tf.global_variables_initializer(), tf.tables_initializer()])
         sentences_embeddings = session.run(embed(df_datos['title_plot']))    
-    
+    print("encoder realizado")
+
     x_test_embed = pd.DataFrame(sentences_embeddings)
     x_test_embed.index = df_datos.index
     
